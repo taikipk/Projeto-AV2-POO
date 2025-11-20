@@ -9,18 +9,16 @@ public class Exercicio1 {
         Scanner sc = new Scanner(System.in);
         int num;
 
-        System.out.print("Digite um número inteiro para gerar a tabuada: ");	// Pedindo o número ao usuário
+        System.out.print("Digite um nÃºmero inteiro para gerar a tabuada: ");	// Pedindo o nÃºmero ao usuÃ¡rio
         if (sc.hasNextInt()) {
             num = sc.nextInt();
-            String tabuada = "tabuada_" + num + ".txt";	// Nome do arquivo onde a tabuada será salva
+            String tabuada = "tabuada_" + num + ".txt";	// Nome do arquivo onde a tabuada serÃ¡ salva
             try {
-                // 2. Cria o FileWriter para escrever no arquivo. O 'false' indica que o arquivo
-                // será sobrescrito se já existir. Use 'true' para anexar conteúdo.
             	
-            	FileWriter fw = new FileWriter(tabuada, false);		//Escrevendo no arquivo, true é para agregar conteúdo.
+            	FileWriter fw = new FileWriter(tabuada, false);		// Escrevendo no arquivo
                 PrintWriter pw = new PrintWriter(fw);
 
-                // 3. Gera e escreve a tabuada no arquivo
+                // Escrevendo a tabuada no arquivo
                 pw.println("Tabuada do " + num + ":");
                 for (int i = 1; i <= 10; i++) {
                     int resultado = num * i;
@@ -37,9 +35,10 @@ public class Exercicio1 {
             }		// Tratando erros
 
         } else {
-            System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
+            System.out.println("Entrada invÃ¡lida. Por favor, digite um nÃºmero inteiro.");
         }
 
         sc.close(); // Fechando o scanner
     }
 }
+

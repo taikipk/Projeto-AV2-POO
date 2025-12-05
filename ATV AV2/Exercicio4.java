@@ -17,7 +17,7 @@ public class Exercicio4 {
             System.out.println("\nContatinho encontrado:");
             System.out.println(resultado.toString());
         } else {
-            System.out.println("Contatinho n„o encontrado.");
+            System.out.println("Contatinho n√£o encontrado.");
         }
 
         sc.close();

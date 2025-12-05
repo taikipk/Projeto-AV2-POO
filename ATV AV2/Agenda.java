@@ -24,7 +24,7 @@ public class Agenda {
 
     public void salvarLista() {
         try {
-            this.ordenarLista(); // garantindo a ordenaÁ„o antes de salvar
+            this.ordenarLista(); // garantindo a ordena√ß√£o antes de salvar
             FileWriter fw = new FileWriter("Lista_Contatinhos.txt");
 
             for (Contatinho c : this.listaContatos) {
@@ -46,7 +46,7 @@ public class Agenda {
 
         
         if (!f.exists()) {		// Verifica se o arquivo existe antes de tentar ler
-            System.out.println("Arquivo de agenda n„o encontrado: " + "Lista_Contatinhos.txt");
+            System.out.println("Arquivo de agenda n√£o encontrado: " + "Lista_Contatinhos.txt");
             return null;
         }
 

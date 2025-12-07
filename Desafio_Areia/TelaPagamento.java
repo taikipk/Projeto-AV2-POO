@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -201,16 +202,19 @@ public class TelaPagamento extends javax.swing.JFrame {
 
     private void calcularPagamentoActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            String entradaValor = campoValorPagar.getText().trim();
+            NumberFormat numBrasil = NumberFormat.getNumberInstance(Locale.of("pt","BR")); //preparando para receber o valor no formato usado do Brasil
+            String entradaValor = campoValorPagar.getText().trim(); //recebendo o valor de uma string
 
             // ** VALIDAÇÃO REGEX **
-            if (!entradaValor.matches("[0-9.,]+")) {
+            if (!entradaValor.matches("[0-9.,]+")) { //validando o valor digitado
                 JOptionPane.showMessageDialog(this,
-                        "Digite apenas números.",
+                        "Digite apenas números com virgula.",
                         "Erro",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
+
+            this.valorPagar=numBrasil.parse(entradaValor).doubleValue(); //transformando a string em um double com a formataçao brasileira
 
             NumberFormat numBrasil = NumberFormat.getNumberInstance(Locale.of("pt", "BR"));
             this.valorPagar = numBrasil.parse(entradaValor).doubleValue();
@@ -220,17 +224,15 @@ public class TelaPagamento extends javax.swing.JFrame {
             this.percentualUtilizacao = (volumePago / volume) * 100;
             this.percentualValor = (valorPagar / valorTotalBau) * 100;
 
-            JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this, //mostrando os dados em uma janela pop-up
                     "Volume total do baú: " + String.format("%.2f m³", this.volume) + "\n" +
                             "Valor total do baú cheio: R$ " + String.format("%.2f", this.valorTotalBau) + "\n\n" +
                             "Valor pago: R$ " + String.format("%.2f", this.valorPagar) + "\n" +
                             "Volume que pode comprar: " + String.format("%.2f m³", this.volumePago) + "\n" +
                             "Percentual de ocupação do baú: " + String.format("%.2f %%", this.percentualUtilizacao) + "\n" +
-                            "Percentual do valor pago: " + String.format("%.2f %%", this.percentualValor),
-                    "Análise",
-                    JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (ParseException | NumberFormatException e) {
+                            "Percentual do valor pago: " + String.format("%.2f %%", this.percentualValor), "Analise", JOptionPane.INFORMATION_MESSAGE);
+        }
+         catch (ParseException | NumberFormatException e) { //Tratando o erro
             JOptionPane.showMessageDialog(this,
                     "Digite um valor válido.",
                     "Erro",

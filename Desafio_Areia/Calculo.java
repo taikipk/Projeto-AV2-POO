@@ -3,6 +3,9 @@ import javax.swing.JOptionPane;
 public class Calculo extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Calculo.class.getName());
+    private double altura;
+    private double largura;
+    private double volume;
 
     public Calculo() {
         initComponents();
@@ -124,12 +127,12 @@ public class Calculo extends javax.swing.JFrame {
 
     private void calculoVolumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculoVolumeActionPerformed
         try {
-            double altura = Double.parseDouble(campoAltura.getText());    //transformando um texto em um double
-            double largura = Double.parseDouble(campoLargura.getText());
-            double comprimento = Double.parseDouble(campoComprimento.getText());
-            double volume = altura * largura * comprimento;
+            this.altura = Double.parseDouble(campoAltura.getText());    //transformando um texto em um double
+            this.largura = Double.parseDouble(campoLargura.getText());
+            this.comprimento = Double.parseDouble(campoComprimento.getText());
+            this.volume = this.altura * this.largura * this.comprimento;
             
-            TelaPagamento tela = new TelaPagamento(volume, altura, largura, comprimento);   //iniciando a janela seguinte
+            TelaPagamento tela = new TelaPagamento(this.volume, this.altura, this.largura, this.comprimento);   //iniciando a janela seguinte
             tela.setVisible(true);  //deixando a janela visível
             
             this.dispose(); //Fechar a janela atual, liberando a memória

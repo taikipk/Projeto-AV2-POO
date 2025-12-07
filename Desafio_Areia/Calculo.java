@@ -5,6 +5,7 @@ public class Calculo extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Calculo.class.getName());
     private double altura;
     private double largura;
+    private double comprimento;
     private double volume;
 
     public Calculo() {

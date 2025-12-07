@@ -1,8 +1,3 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 import javax.swing.JOptionPane;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -11,16 +6,16 @@ import java.text.ParseException;
 public class TelaPagamento extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaPagamento.class.getName());
-    private double volume;
+    private final double volume;
     private final double altura;
     private final double largura;
     private final double comprimento;
     private final double valorMCubico = 53.39;
     private double valorPagar;
-    private double valorTotalBau = volume * valorMCubico;
-    private double volumePago = valorPagar / valorMCubico;
-    private double percentualUtilizacao = (volumePago / volume) * 100;
-    private double percentualValor = (valorPagar / valorTotalBau) * 100;
+    private double valorTotalBau;
+    private double volumePago;
+    private double percentualUtilizacao;
+    private double percentualValor;
 
     public TelaPagamento(double volume, double altura, double largura, double comprimento) {
         this.volume = volume;
@@ -28,13 +23,13 @@ public class TelaPagamento extends javax.swing.JFrame {
         this.largura = largura;
         this.comprimento = comprimento;
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);    //Janela inicia no centro da tela
 
-        labelAltura.setText(String.format("%.2f metros", this.altura));
+        labelAltura.setText(String.format("%.2f metros", this.altura));    //Mostrando os dados recebidos
         labelLargura.setText(String.format("%.2f metros", this.largura));
         labelComprimento.setText(String.format("%.2f metros", this.comprimento));
         labelVolume.setText(String.format("%.2f m³", this.volume));
-        labelTotalValor.setText(String.format("R$ %.2f", this.volume * 53.39));
+        labelTotalValor.setText(String.format("R$ %.2f", this.volume * this.valorMCubico));
         labelAreiaM3.setText(String.format("R$ %.2f", this.valorMCubico));
     }
 
@@ -202,11 +197,10 @@ public class TelaPagamento extends javax.swing.JFrame {
 
     private void calcularPagamentoActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            NumberFormat numBrasil = NumberFormat.getNumberInstance(Locale.of("pt","BR")); //preparando para receber o valor no formato usado do Brasil
-            String entradaValor = campoValorPagar.getText().trim(); //recebendo o valor de uma string
+            NumberFormat numBrasil = NumberFormat.getNumberInstance(Locale.of("pt","BR")); //preparando para receber o valor no formato usado no Brasil
+            String entradaValor = campoValorPagar.getText().trim(); //recebendo o valor em uma string
 
-            // ** VALIDAÇÃO REGEX **
-            if (!entradaValor.matches("[0-9.,]+")) { //validando o valor digitado
+            if (!entradaValor.matches("[0-9,]+")) { //validando o valor digitado
                 JOptionPane.showMessageDialog(this,
                         "Digite apenas números com virgula.",
                         "Erro",
@@ -214,10 +208,7 @@ public class TelaPagamento extends javax.swing.JFrame {
                 return;
             }
 
-            this.valorPagar=numBrasil.parse(entradaValor).doubleValue(); //transformando a string em um double com a formataçao brasileira
-
-            NumberFormat numBrasil = NumberFormat.getNumberInstance(Locale.of("pt", "BR"));
-            this.valorPagar = numBrasil.parse(entradaValor).doubleValue();
+            this.valorPagar=numBrasil.parse(entradaValor).doubleValue(); //Transformando a string em um double com a formataçao brasileira
 
             this.valorTotalBau = volume * valorMCubico;
             this.volumePago = valorPagar / valorMCubico;
@@ -230,7 +221,7 @@ public class TelaPagamento extends javax.swing.JFrame {
                             "Valor pago: R$ " + String.format("%.2f", this.valorPagar) + "\n" +
                             "Volume que pode comprar: " + String.format("%.2f m³", this.volumePago) + "\n" +
                             "Percentual de ocupação do baú: " + String.format("%.2f %%", this.percentualUtilizacao) + "\n" +
-                            "Percentual do valor pago: " + String.format("%.2f %%", this.percentualValor), "Analise", JOptionPane.INFORMATION_MESSAGE);
+                            "Percentual do valor pago: " + String.format("%.2f %%", this.percentualValor), "Análise", JOptionPane.INFORMATION_MESSAGE);
         }
          catch (ParseException | NumberFormatException e) { //Tratando o erro
             JOptionPane.showMessageDialog(this,
